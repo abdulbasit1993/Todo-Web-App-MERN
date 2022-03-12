@@ -1,14 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const morgan = require("morgan");
+const dotenv = require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
+
+const MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGODB_URI}${process.env.DB_NAME}?retryWrites=true&w=majority`;
+console.log("🚀 ~ file: server.js ~ line 10 ~ MONGO_URL", MONGO_URL);
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/mern-todo", {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -18,7 +26,9 @@ mongoose
 const Todo = require("./models/Todo");
 
 app.get("/", async (req, res) => {
-  res.send("Welcome to Todo List APIs!");
+  res.send({
+    message: "Welcome to Todo List APIs!",
+  });
 });
 
 app.get("/todos", async (req, res) => {
@@ -53,4 +63,4 @@ app.put("/todo/complete/:id", async (req, res) => {
   res.json(todo);
 });
 
-app.listen(3001, () => console.log("Server started on port 3001"));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
