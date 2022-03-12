@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const API_BASE = "http://192.168.0.111:3001";
+// const API_BASE = "http://192.168.0.111:3001";
+const API_BASE = "https://mern-todo-api-abm.herokuapp.com"; // live URL
 
 function App() {
   const [todos, setTodos] = useState([]);
