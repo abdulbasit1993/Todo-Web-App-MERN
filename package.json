@@ -1,5 +1,6 @@
 {
   "name": "todo-web-app",
+  "homepage": "https://abdulbasit1993.github.io/Todo-Web-App-MERN",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
